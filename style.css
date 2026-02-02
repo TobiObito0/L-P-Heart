@@ -1,3 +1,9 @@
+:root {
+    --text: "♥ Bình";
+    --backup_text: "Happy New Year!";
+    --main-color: #ff2d55;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +26,7 @@ body {
     width: 120px;
     height: 120px;
     position: relative;
-    background: #ff2d55;
+    background: var(--main-color);
     transform: rotate(-45deg);
     box-shadow: 0px 0px 60px rgba(255, 45, 85, 0.6);
     animation:
@@ -37,7 +43,7 @@ body {
     position: absolute;
     width: 120px;
     height: 120px;
-    background: #ff2d55;
+    background: var(--main-color);
     border-radius: 50%;
 }
 
@@ -133,7 +139,6 @@ body {
 /* After an animation the heart, show the text */
 .text {
     position: absolute;
-    color: #ff2d55;
     font-family: "Courier New", monospace;
     font-size: 48px;
     letter-spacing: 8px;
@@ -141,6 +146,30 @@ body {
     text-shadow: 0 0 20px rgba(255, 45, 85, 0.8);
     animation: loveAppear 2s ease forwards;
     animation-delay: 8s;
+}
+
+.text::after {
+    content: var(--text);
+    color: var(--main-color);
+    animation: loveDisappear 2s ease forwards;
+    animation-delay: 14s;
+}
+
+.backup_text {
+    position: absolute;
+    font-family: "Courier New", monospace;
+    font-size: 48px;
+    letter-spacing: 8px;
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(255, 45, 85, 0.8);
+    animation: happyAppear 2s ease forwards;
+    animation-delay: 16s;
+}
+
+.backup_text::after {
+    content: var(--backup_text);
+    color: var(--main-color);
+    
 }
 
 /* Animation for the text */
@@ -161,5 +190,65 @@ body {
         opacity: 1;
         transform: scale(1);
         filter: blur(0);
+    }
+}
+
+@keyframes loveDisappear {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+        filter: blur(8px);
+    }
+}
+
+@keyframes happyAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(10px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.05);
+        filter: blur(2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .heart {
+        width: 80px;
+        height: 80px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 80px;
+        height: 80px;
+    }
+
+    .heart::before {
+        top: -40px;
+    }
+
+    .heart::after {
+        left: 40px;
+    }
+
+    .text {
+        font-size: 28px;
+        letter-spacing: 4px;
     }
 }
